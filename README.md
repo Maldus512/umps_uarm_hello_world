@@ -21,8 +21,10 @@ Perche' la compilazione vada a buon fine sono necessari i seguenti pacchetti:
 
 Molto semplicemente vengono forniti due makefile separati per la compilazione, `uarmmake` e `umpsmake`. Invocando `make` sul file corrispondente si compila l'esempio per l'emulatore richiesto:
 
-`$ make -f uarmmake`
-`$ make -f umpsmake`
+```
+$ make -f uarmmake
+$ make -f umpsmake
+```
 
 Dietro le quinte le differenze tra i due makefile sono:
 
@@ -36,8 +38,10 @@ Dietro le quinte le differenze tra i due makefile sono:
 Scons e' un build tool alternativo a make. Si tratta sostanzialmente di una libreria Python per la gestione di sorgenti. Invocando il comando `scons` viene eseguito lo script `SConstruct`, analogamente al funzionamento di make.
 Usando i parametri `uarm` o `umps` e' possibile differenziare il target a riga di comando in maniera del tutto analoga al funzionamento di make.
 
-`$ scons umps`
-`$ scons uarm`
+```
+$ scons umps
+$ scons uarm
+```
 
 Oltre a questo semplice utilizzo pero' lo script `SConstruct` e' configurato anche per utilizzare il meccanismo di configurazione tipico del kernel Linux, Kconfig.
 Kconfig comporta la definizione di menu di configurazione (i file `Kconfig`) che seguono una sintassi specifica (https://www.kernel.org/doc/html/latest/kbuild/kconfig-language.html). Molteplici tool sono poi in grado di leggere questi file e comportarsi di conseguenza o generare degli header che a loro volta influenzino il comportamento dei sorgenti.
