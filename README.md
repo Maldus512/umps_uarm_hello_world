@@ -19,12 +19,7 @@ Perche' la compilazione vada a buon fine sono necessari i seguenti pacchetti:
 
 ## Make
 
-Molto semplicemente vengono forniti due makefile separati per la compilazione, `uarmmake` e `umpsmake`. Invocando `make` sul file corrispondente si compila l'esempio per l'emulatore richiesto:
-
-```
-$ make -f uarmmake
-$ make -f umpsmake
-```
+Molto semplicemente vengono forniti due makefile separati per la compilazione, `uarmmake` e `umpsmake`. Invocando `make uarm` o `make umps2` si procede con la compilazione dell'architettura richiesta.
 
 Dietro le quinte le differenze tra i due makefile sono:
 
