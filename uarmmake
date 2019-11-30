@@ -11,7 +11,7 @@ INCLUDE_DIR = ./include
 # Compiler options
 CFLAGS_LANG = 
 CFLAGS_UARM = -mcpu=arm7tdmi -DTARGET_UARM=1
-CFLAGS = $(CFLAGS_LANG) $(CFLAGS_UARM) -I$(UARM_DIR) -I$(UARM_DIR)/uarm -I$(INCLUDE_DIR) -DUARM=1 -Wall -O0
+CFLAGS = $(CFLAGS_LANG) $(CFLAGS_UARM) -I$(UARM_DIR) -I$(UARM_DIR)/uarm -I$(INCLUDE_DIR) -Wall -O0
 
 # Linker options
 LDFLAGS = -G 0 -nostdlib -T $(UARM_DIR)/elf32ltsarm.h.uarmcore.x
