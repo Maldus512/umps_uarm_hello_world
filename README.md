@@ -9,8 +9,8 @@ A scopo di esempio sono implementati almeno due possibili metodi per la configur
 
 Perche' la compilazione vada a buon fine sono necessari i seguenti pacchetti:
 
-- arm-none-eabi-gcc
-- mipsel-linux-gnu-gcc
+- arm-none-eabi-gcc (vedere sezione sulle toolchain)
+- mipsel-linux-gnu-gcc (vedere sezione sulle toolchain)
 - uarm (per la compilazione su uarm)
 - umps (per la compilazione su umps)
 - make (per utilizzare i makefile)
@@ -60,3 +60,23 @@ A questo punto e' possibile editare la configurazione (specificata dal file `Kco
 ## Esecuzione
 
 Per l'esecuzione dell'esempio fare riferimento ai manuali di uARM e uMPS2, rispettivamente.
+
+## Toolchain
+
+Sia `uarm-none-eabi-gcc` che `mipsel-linux-gnu-gcc` sono disponibili come pacchetti ufficiali nelle repository della maggior parte delle distribuzioni di Linux.
+Nel caso non dovessere essere cosi', e' possibile creare dei binari ad-hoc tramite `crosstool-ng`.
+`crosstool-ng` e' un tool per la compilazione di toolchain. Anch'esso dovrebbe essere disponibile come pacchetto (semi) ufficiale nella maggior parte delle distribuzioni; alternativamente e' installabile dai sorgenti (http://crosstool-ng.github.io/docs/install/).
+
+Una volta installato e' possibile creare la toolchain necessaria, configurandola nel dettaglio. Per esempio, la configurazione di esempio `mipsel-unknown-linux-gnu` e' valida per compilare un kernel per umps2. Per generarla e usarla e' necessario:
+
+- Installare `crosstool-ng`
+- La directory dalla quale vengono lanciati i seguenti comandi non ha un significato particolare se non quello di contenere il file di configurazione e di compilazione intermedia del processo. Possono essere cancellati dopo aver creato la toolchain.
+- Configurare la toolchain; per importare la configurazione di esempio basta invocare `ct-ng mipsel-unknown-linux-gnu`. Questo comando creera' il file `.config` nella cartella corrente.
+- Costruire la toolchain con il comando `ct-ng build`. Questo comando scarichera' tutti i binari e i sorgenti necessari nella directory `.build`. Una volta terminato il processo (anche molto lungo a seconda delle prestazioni della macchina host), la toolchain sara' installata in `$HOME/x-tools/mipsel-unknown-linux-gnu/bin`
+- Il cross-compiler cosi' generato deve essere usato da `make` o `scons` come compilatore per i sorgenti. Per esempio, lo script `umpsmake` dovrebbe essere modificato in questo modo:
+```
+#XT_PRG_PREFIX = mipsel-linux-gnu-
+XT_PRG_PREFIX = ~/x-tools/mipsel-unknown-linux-gnu/bin/mipsel-unknown-linux-gnu-
+```
+
+- In seguito e' sufficiente invocare `make`

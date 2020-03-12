@@ -1,6 +1,7 @@
 *.config
 *.config.old
 .sconsign.dblite
+umps2.config
 *.umps
 *.uarm
 *.o
