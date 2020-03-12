@@ -1,10 +1,18 @@
+# Generic directores section
+build*/
+
+# Generic files section
 *.config
 *.config.old
-.sconsign.dblite
-umps2.config
+*.o
+*.sw[op]
 *.umps
 *.uarm
-*.o
+
+# Specific files section
+.sconsign.dblite
+umps2.config
 kernel
 .config
 .env
+Session.vim
