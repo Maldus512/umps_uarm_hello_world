@@ -33,8 +33,24 @@ Dietro le quinte le differenze tra i due makefile sono:
  - inclusione di diversi header
  - definizione delle macro `TARGET_UMPS` o `TARGET_UARM` per ottenere un comportamento diverso (in questo semplice esempio la cosa si riduce all'includere degli header diversi)
 
-## Scons e Kconfig
+## CMake
+Il setup CMake supporta attualmente soltanto l'architettura uARM. Per farne uso è necessario creare un'apposita directory di build
 
+```
+mkdir build-uarm
+cd build-uarm
+cmake -D CMAKE_TOOLCHAIN_FILE=../toolchains/uarm.cmake ..
+```
+
+dalla quale sarà poi possibile compilare effettivamente uno dei target disponibili
+
+```
+make kernel.uarm
+```
+
+CMake, dalla portata generale, permette di utilizzare molti altri generatori oltre a make.
+
+## Scons e Kconfig
 Scons e' un build tool alternativo a make. Si tratta sostanzialmente di una libreria Python per la gestione di sorgenti. Invocando il comando `scons` viene eseguito lo script `SConstruct`, analogamente al funzionamento di make.
 Usando i parametri `uarm` o `umps` e' possibile differenziare il target a riga di comando in maniera del tutto analoga al funzionamento di make.
 
