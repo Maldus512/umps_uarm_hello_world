@@ -17,9 +17,9 @@ set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")
 include_directories(${UARM_INC})
 include_directories(${UARM_INC}/uarm)
 
-add_library(libuarm OBJECT ${UARM_SRC}/libuarm.s)
-add_library(libdiv OBJECT ${UARM_SRC}/libdiv.s)
-add_library(crtso OBJECT ${UARM_SRC}/crtso.s)
+add_library(libuarm ${UARM_SRC}/libuarm.s)
+add_library(libdiv ${UARM_SRC}/libdiv.s)
+add_library(crtso ${UARM_SRC}/crtso.s)
 
 add_executable(kernel.uarm ${SRC}/hello.c)
 target_link_libraries(kernel.uarm crtso libuarm termprint)

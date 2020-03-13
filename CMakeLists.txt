@@ -13,7 +13,7 @@ include_directories(${PROJECT_SOURCE_DIR}/${INC})
 include_directories(${PROJECT_BINARY_DIR}/${INC})
 add_compile_options(${CFLAGS_LANG})
 
-add_library(termprint OBJECT ${SRC}/termprint.c)
+add_library(termprint ${SRC}/termprint.c)
 
 # Conditional inclusion of targets upon the detected architecture
 if (CMAKE_SYSTEM_PROCESSOR STREQUAL mips)
