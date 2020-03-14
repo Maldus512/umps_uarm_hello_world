@@ -13,8 +13,6 @@ include_directories(${INC})
 include_directories(${INC})
 add_compile_options(${CFLAGS_LANG})
 
-add_library(termprint ${SRC}/termprint.c)
-
 # Conditional inclusion of targets upon the detected architecture
 if (CMAKE_SYSTEM_PROCESSOR STREQUAL mips)
 	add_definitions(-DTARGET_UMPS)
@@ -27,3 +25,7 @@ else()
 	CMAKE_TOOLCHAIN_FILE=toolchains/umps.cmake or -D
 	CMAKE_TOOLCHAIN_FILE=toolchains/uarm.cmake")
 endif()
+
+# Note: defining libraries before the include() block above may lead to bugs,
+# for special compiler/linker flags would not be assigned to them
+add_library(termprint ${SRC}/termprint.c)
