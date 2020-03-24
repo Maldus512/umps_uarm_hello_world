@@ -34,21 +34,30 @@ Dietro le quinte le differenze tra i due makefile sono:
  - definizione delle macro `TARGET_UMPS` o `TARGET_UARM` per ottenere un comportamento diverso (in questo semplice esempio la cosa si riduce all'includere degli header diversi)
 
 ## CMake
-Il setup CMake supporta attualmente soltanto l'architettura uARM. Per farne uso è necessario creare un'apposita directory di build
+L'attuale configurazione CMake, compatibile con entrambe le architetture, può essere presa come punto di partenza per la gestione di progetti più grandi. È possibile compilare per l'architettura uARM seguendo i passi seguenti, per uMPS sostituendo il file `toolchains/uarm.cmake` con `toolchains/umps.cmake`
 
 ```
-mkdir build-uarm
-cd build-uarm
-cmake -D CMAKE_TOOLCHAIN_FILE=../toolchains/uarm.cmake ..
+$ mkdir build-uarm
+$ cd build-uarm
+$ cmake -D CMAKE_TOOLCHAIN_FILE=../toolchains/uarm.cmake ..
 ```
 
-dalla quale sarà poi possibile compilare effettivamente uno dei target disponibili
+Quanto fatto costruirà un ambiente per CMake dentro la directory `build-uarm/` (il nome è arbitrario), dalla quale sarà poi possibile compilare i target desiderati, ad esempio
 
 ```
-make kernel.uarm
+$ make kernel.uarm
 ```
 
-CMake, dalla portata generale, permette di utilizzare molti altri generatori oltre a make.
+Complessivamente, i file che appartengono a tale configurazione sono cinque: `CMakeLists.txt`, `uarm.cmake`, `umps.cmake`, `toolchains/uarm.cmake` e `toolchains/umps.cmake`.
+
+L'utilità di CMake è dovuta alla possibilità di astrarre rispetto ai cosiddetti generatori (es. `make`) e alla sua ottima integrazione con molti degli IDE in circolazione.
+
+### CMake: approfondimenti
+A proposito del setup CMake, può essere utile osservare che
+
+* I file all'interno di `toolchains/` non sono che "configurazioni" per le toolchain di cross-compilazione. Maggiori informazioni possono essere trovate presso la [documentazione ufficiale](https://cmake.org/cmake/help/v3.17/manual/cmake-toolchains.7.html).
+* Può essere opportuno mirare all'uso di una versione CMake (vedi `cmake_minimum_required`) meno aggiornata rispetto all'ultima, nel tentativo di mantenere una più ampia compatibilità con le diverse installazioni.
+* Benché questa configurazione abbia subito test su almeno tre distro Linux differenti, non è escluso che essa sappia adattarsi perfettamente alla vostra toolchain. In caso di errori è suggerito installarne una diversa con `crosstool-ng` (vedi sotto) o, eventualmente, aprire una discussione nella paggina Issues.
 
 ## Scons e Kconfig
 Scons e' un build tool alternativo a make. Si tratta sostanzialmente di una libreria Python per la gestione di sorgenti. Invocando il comando `scons` viene eseguito lo script `SConstruct`, analogamente al funzionamento di make.
