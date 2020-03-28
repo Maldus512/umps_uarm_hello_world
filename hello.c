@@ -1,21 +1,17 @@
-#include "term.h"
-#include "printprint.h"
 #include "system.h"
+#include "termprint.h"
 
 int main(void)
 {
-    char str[64];
+	unsigned const buffsize = 64;
+    char str[buffsize];
+    int i;
 
-    int i = term_gets(str, 64);
-    str[i] = '\0';
-    term_puts("Stringa letta!");
+	term_puts("ENTER SOME TEXT\n> ");
 
-    print_puts("Stringa letta: ");
-    print_puts(str);
+    i = term_gets(str, buffsize);
+	str[i] = '\0';
+    term_puts(str);
 
-    /* Go to sleep indefinetely */
-    while (1) 
-        WAIT();
     return 0;
 }
-
